@@ -1,27 +1,25 @@
 import { Message, Wechaty } from 'wechaty';
+import { hotNewsTips } from '../schedule/daily-tips';
+import { jian_bao_id } from '../tools/constant';
 
-export async function onMessage(message: Message) {
+export async function onMessage(message: Message, bot: Wechaty) {
   try {
     const room = message.room();
     const sender = message.talker();
     const content = message.text();
-    // console.log(room, sender);
+    console.log(sender);
 
     if (message.self()) {
       return;
     }
 
-    // @me
-    // if (content.includes('非凡哥')) {
-    //   await message.say('叼毛！');
-    // }
+    // 每日简报
+    if (sender && sender.id === jian_bao_id) {
+      await hotNewsTips(bot, content);
+    }
+
   } catch (e) {
     console.error(e);
   }
 }
 
-// export const sendMsgToSomeone = async (bot: Wechaty, toUserId: string, msg: any): Promise<Message> => {
-  // const toContact = await bot.Contact.load(toUserId);
-  // const message = (await toContact.say(msg)) as Message;
-  // return message;
-// };
