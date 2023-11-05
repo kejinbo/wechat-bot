@@ -14,17 +14,3 @@ async function main() {
 }
 
 main();
-
-// import { ChatGPTAPI } from "chatgpt";
-
-// async function test() {
-//   // const key = process.env.OPENAI_API_KEY as string;
-//   // console.log(key);
-//   const api = new ChatGPTAPI({
-//     apiKey: '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',
-//   });
-
-//   const res = await api.sendMessage('你是？');
-//   console.log(res, res.text);
-// }
-// test();

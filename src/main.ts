@@ -9,35 +9,39 @@ const puppet = new PuppetPadlocal({
 });
 
 const bot = WechatyBuilder.build({
-  name: 'WechatBot',
+  name: 'kebobo',
   puppet, // 还是得用puppet，不然像找联系人，是无法找全的。
-})
-  .on('scan', (qrcode, status) => {
-    if (status === ScanStatus.Waiting && qrcode) {
-      const qrcodeImageUrl = ['https://wechaty.js.org/qrcode/', encodeURIComponent(qrcode)].join('');
-      log.info(`onScan: ${ScanStatus[status]}(${status}) - ${qrcodeImageUrl}`);
+});
+bot.on('scan', (qrcode, status) => {
+  if (status === ScanStatus.Waiting && qrcode) {
+    const qrcodeImageUrl = ['https://wechaty.js.org/qrcode/', encodeURIComponent(qrcode)].join('');
+    log.info(`onScan: ${ScanStatus[status]}(${status}) - ${qrcodeImageUrl}`);
 
-      // require('qrcode-terminal').generate(qrcode, { small: true }); // 生成二维码到控制台
-    } else {
-      log.info(`onScan: ${ScanStatus[status]}(${status})`);
-    }
-  })
+    // require('qrcode-terminal').generate(qrcode, { small: true }); // 生成二维码到控制台
+  } else {
+    log.info(`onScan: ${ScanStatus[status]}(${status})`);
+  }
+});
 
-  .on('login', async (user) => {
-    log.info(`${user} login`);
-    await notForgetSignInOut(bot, boss_id);
-    await sleepTips(bot);
-    await dailyWeatherTips(bot);
-  })
+bot.on('login', async (user) => {
+  log.info(`${user} login`);
+  await notForgetSignInOut(bot, boss_id);
+  await sleepTips(bot);
+  await dailyWeatherTips(bot);
+});
 
-  .on('logout', (user, reason) => {
-    log.info(`${user} logout, reason: ${reason}`);
-  })
+bot.on('logout', (user, reason) => {
+  log.info(`${user} logout, reason: ${reason}`);
+});
 
-  .on('message', (message) => {
-    onMessage(message, bot);
-  });
+bot.on('message', (message) => {
+  onMessage(message, bot);
+});
 
 bot.start().then(async () => {
   log.info('started.');
+});
+
+bot.ready().then(() => {
+  log.info('ready.');
 });

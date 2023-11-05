@@ -43,7 +43,6 @@ import { room_id_list } from '../tools/constant';
 export function setSchedule(date: string, callback: JobCallback): void {
   schedule.scheduleJob(date, callback);
 }
-// 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
 
 // 工作日签到提示
 export async function notForgetSignInOut(bot: Wechaty, toUserId: string) {
@@ -99,7 +98,7 @@ ${news}
 }
 
 // 天气预报
-export async function dailyWeatherTips(bot: Wechaty) {
+export async function dailyWeatherTips(bot: Wechaty, room_id: string = '') {
   try {
     
     setSchedule('0 0 9 * * *', async () => {
@@ -119,7 +118,9 @@ ${res.forecasts[0].province}省${res.forecasts[0].city}今日天气报告：
           }
         }
 
-        for (let id of room_id_list) {
+        const rooms = room_id ? [room_id] : room_id_list;
+
+        for (let id of rooms) {
           const room = await bot.Room.find({ id });
           room?.say(result);
         }

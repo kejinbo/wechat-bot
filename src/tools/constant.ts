@@ -5,7 +5,7 @@
  * 24942146074@chatroom 嗨森
  * 34533469663@chatroom 麻将群
  */
-const dev = true;
+const dev = false;
 const dev_room_list = ['49904552220@chatroom'];
 const room_id_list = dev ? dev_room_list : ['12138991560@chatroom', '24942146074@chatroom', '34533469663@chatroom'];
 
@@ -25,6 +25,10 @@ const GD_KEY = '8e673fb53a3022ef541f51cb79bcc075';
 const GD_HOST = 'https://restapi.amap.com/v3/weather/weatherInfo';
 
 const puppet_token = 'puppet_padlocal_5e719c9342584cea9b0157b7a6b1c8cd';
+
+/**
+ * 其他常量
+ * */
 
 export {
   room_id_list,
