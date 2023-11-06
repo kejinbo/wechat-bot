@@ -47,10 +47,11 @@ export function setSchedule(date: string, callback: JobCallback): void {
 // 工作日签到提示
 export async function notForgetSignInOut(bot: Wechaty, toUserId: string) {
   const contact = await bot.Contact.find({ id: toUserId });
-  setSchedule('0 0 9 * * ,1-5', async () => {
+
+  setSchedule('0 0 9 * * 1-5', async () => {
     contact?.say('别忘了签入！');
   });
-  setSchedule('0 0 19 * * ,1-5', async () => {
+  setSchedule('0 0 19 * * 1-5', async () => {
     contact?.say('别忘了签出！');
   });
 }
@@ -68,39 +69,38 @@ export async function sleepTips(bot: Wechaty) {
 // 每日热点
 export async function hotNewsTips(bot: Wechaty, messageText: string) {
   const result = await parseStringPromise(messageText);
-    const appmsgArr = result.msg.appmsg || result.appmsg
-    if (appmsgArr && appmsgArr.length) {
-      const url = appmsgArr[0].url[0];
-      const news = await superagent.get(url);
-      let $ = cheerio.load(news.text);
-      const hotNews: string[] = [];
-      $('section[data-id="89202"] p').each((idx: number, ele: any) => {
-        hotNews.push($(ele).text());
-      });
-      // 【微语】
-      $('section[data-id="89202"] section[data-role="outer"] p:last + section').each((idx: number, ele: any) => {
-        hotNews.push($(ele).text());
-      });
-      let text = '';
-      hotNews[0] = hotNews[0].replace('【每日资讯简报，一分钟知天下事】', '【早报】');
-      for (let i = 0; i < hotNews.length; i++) {
-        const news = hotNews[i];
-        text += `
+  const appmsgArr = result.msg.appmsg || result.appmsg;
+  if (appmsgArr && appmsgArr.length) {
+    const url = appmsgArr[0].url[0];
+    const news = await superagent.get(url);
+    let $ = cheerio.load(news.text);
+    const hotNews: string[] = [];
+    $('section[data-id="89202"] p').each((idx: number, ele: any) => {
+      hotNews.push($(ele).text());
+    });
+    // 【微语】
+    $('section[data-id="89202"] section[data-role="outer"] p:last + section').each((idx: number, ele: any) => {
+      hotNews.push($(ele).text());
+    });
+    let text = '';
+    hotNews[0] = hotNews[0].replace('【每日资讯简报，一分钟知天下事】', '【早报】');
+    for (let i = 0; i < hotNews.length; i++) {
+      const news = hotNews[i];
+      text += `
 ${news}
         `;
-      }
-      
-      for (let id of room_id_list) {
-        const room = await bot.Room.find({ id });
-        room?.say(text);
-      }
     }
+
+    for (let id of room_id_list) {
+      const room = await bot.Room.find({ id });
+      room?.say(text);
+    }
+  }
 }
 
 // 天气预报
 export async function dailyWeatherTips(bot: Wechaty, room_id: string = '') {
   try {
-    
     setSchedule('0 0 9 * * *', async () => {
       Promise.all([getCityWeather(440300), getCityWeather(440100), getCityWeather(440900)]).then(async (results) => {
         let result = '米娜桑，早上好~';

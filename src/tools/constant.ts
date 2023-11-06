@@ -5,7 +5,7 @@
  * 24942146074@chatroom 嗨森
  * 34533469663@chatroom 麻将群
  */
-const dev = false;
+const dev = true;
 const dev_room_list = ['49904552220@chatroom'];
 const room_id_list = dev ? dev_room_list : ['12138991560@chatroom', '24942146074@chatroom', '34533469663@chatroom'];
 
@@ -25,10 +25,20 @@ const GD_KEY = '8e673fb53a3022ef541f51cb79bcc075';
 const GD_HOST = 'https://restapi.amap.com/v3/weather/weatherInfo';
 
 const puppet_token = 'puppet_padlocal_5e719c9342584cea9b0157b7a6b1c8cd';
+const rapid_key = '1f60982f6fmsh77a9b89f1a1a7ecp16b5f9jsnd841933973e2'; // 去背景的 请求接口key
 
 /**
  * 其他常量
  * */
+// 获取宠物狗图片
+const get_dog_photo_api = 'https://api.thedogapi.com/v1/images/search?size=full'
+const get_cat_photo_api = 'https://api.thecatapi.com/v1/images/search?size=full'
+
+// 名言警句
+const get_quotations_from_famous_people = 'https://api.xygeng.cn/one';
+
+// 讲个笑话
+const joke_api = 'https://api.vvhan.com/api/joke';
 
 export {
   room_id_list,
@@ -38,4 +48,9 @@ export {
   GD_KEY,
   GD_HOST,
   puppet_token,
+  get_dog_photo_api,
+  get_cat_photo_api,
+  get_quotations_from_famous_people,
+  rapid_key,
+  joke_api,
 }

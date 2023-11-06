@@ -17,7 +17,7 @@ bot.on('scan', (qrcode, status) => {
     const qrcodeImageUrl = ['https://wechaty.js.org/qrcode/', encodeURIComponent(qrcode)].join('');
     log.info(`onScan: ${ScanStatus[status]}(${status}) - ${qrcodeImageUrl}`);
 
-    // require('qrcode-terminal').generate(qrcode, { small: true }); // 生成二维码到控制台
+    require('qrcode-terminal').generate(qrcode, { small: true }); // 生成二维码到控制台
   } else {
     log.info(`onScan: ${ScanStatus[status]}(${status})`);
   }
