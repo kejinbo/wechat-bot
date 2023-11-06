@@ -26,6 +26,7 @@
     "axios": "^1.6.0",
     "chatgpt": "^5.2.5",
     "cheerio": "^1.0.0-rc.12",
+    "file-box": "^1.5.5",
     "moment": "^2.29.4",
     "node-schedule": "^2.1.1",
     "openai": "^4.15.0",
