@@ -21,11 +21,11 @@ const boss_bro_id = 'wxid_r7d3kgz8smqm22'; // 大佬小号ID
  * 
  * GD => 高德
  * */
-const GD_KEY = '8e673fb53a3022ef541f51cb79bcc075';
+const GD_KEY = '';
 const GD_HOST = 'https://restapi.amap.com/v3/weather/weatherInfo';
 
-const puppet_token = 'puppet_padlocal_5e719c9342584cea9b0157b7a6b1c8cd';
-const rapid_key = '1f60982f6fmsh77a9b89f1a1a7ecp16b5f9jsnd841933973e2'; // 去背景的 请求接口key
+const puppet_token = '';
+const rapid_key = ''; // 去背景的 请求接口key
 
 /**
  * 其他常量
